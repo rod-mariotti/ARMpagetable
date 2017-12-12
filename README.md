@@ -1,2 +1,2 @@
 # ARMpagetable
-Linux kernel modulte that prints the page table
+Linux kernel module that prints the page table
