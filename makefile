@@ -1,4 +1,4 @@
-obj-m := hello.o # generates hello.ko from hello.o
+obj-m := arm_pt.o # generates hello.ko from hello.o
 
 KERNELDIR := /lib/modules/$(shell uname -r)/build/
 
