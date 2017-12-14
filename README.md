@@ -1,7 +1,7 @@
 # ARMpagetable
 Linux kernel module that prints the page table
 
-**This project is for didactic purpose**, the code is tested on a Raspberry Pi 3 and should be compatible with every ARMv6/ARMv7 device.
+_This project is for didactic purpose_, the code is tested on a Raspberry Pi 3 and should be compatible with every ARMv6/ARMv7 device.
 
 ## Paging in ARM
 l'architettura ARMv6/ARMv7 utilizza una page table a 2 livelli e supporta pagine di 4 dimensioni diverse:
