@@ -6,14 +6,15 @@
 #include <linux/kernel.h>
 
 #define PRESENT_BIT ARM_PRESENT_BIT_MASK
-#define PGB_SIZE ARM_PGB_SIZE
+#define PGB_SIZE 4096
 
 static int present_isset(unsigned long int page_entry);
 static void print_pgd(unsigned long int *pgd);
+static void ctsk_explore(void);
 
 static int __init arm_pt_init(void)
 {
-    ;
+    ctsk_explore();
 }
 module_init(arm_pt_init);
 
@@ -36,12 +37,25 @@ static void print_pgd(unsigned long int *pgd)
     
     for (i_pgd; i_pgd < PGB_SIZE; i_pgd++) {
         if (present_isset(pgd[i_pgd])) {
-            printk(KERN_ALERT "PGD index: %d\tPGD entry = 0x%16.16lx\n", i_pgd,
+            printk(KERN_ALERT "PGD index: %d\tPGD entry = 0x%8.8lx\n", i_pgd,
                   (unsigned long int) pgd[i_page_glb_dir]);
         }
     }
 }
 
+static void ctsk_explore(void)
+{
+    struct task_struct *ctsk;
+    struct mm_struct *mms;
+
+    ctsk = get_current();
+    printk(KERN ALERT "==== PID current process: %d\n ====", ctsk->pid);
+
+    mms = ts->mm;
+
+    pgd = (unsigned long int *) mms->pgd;
+    print_pgd(pgd);
+}
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Rodolfo Mariotti <rodolfo.mariotti@mail.polimi.it>");
