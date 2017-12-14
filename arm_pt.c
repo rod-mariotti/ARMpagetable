@@ -19,6 +19,7 @@ static int present_isset(unsigned long int page_entry);
 static void print_pgd(unsigned long int * pgd);
 static void ctsk_explore(void);
 static void split_addr(unsigned long int phaddr, struct saddr split);
+static void print_saddr(struct saddr spli);
 
 static int __init arm_pt_init(void)
 {
@@ -69,9 +70,22 @@ static void split_addr(unsigned long int phaddr, struct saddr split)
 {
     unsigned long tmp;
     split.offset = tmp & OFFSET;
-    tmp = tmp >> 12
+    
+    tmp = tmp >> PT_OFFSET;
+    split.i_pt = tmp & PTE_MASK;
+    
+    tmp = tmp >> PMD_OFFSET;
+    split.i_pmd = tmp & PTE_MASK;
 
+    tmp = tmp >> PGD_OFFSET;
+    split.i_pgd = tmp & PTE_MASK;
 }
+
+static void print_saddr(struct saddr split)
+{
+    ;
+}
+
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Rodolfo Mariotti <rodolfo.mariotti@mail.polimi.it>");
