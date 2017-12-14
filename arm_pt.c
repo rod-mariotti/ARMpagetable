@@ -25,7 +25,7 @@ module_exit(arm_pt_exit);
 
 static int present_bit_isset(unsigned long int page_entry)
 {
-    return (page_entry && PRESENT_BIT);
+    return (page_entry & PRESENT_BIT);
 }
 
 static void print_pgd(unsigned long int *page_glb_dir)
